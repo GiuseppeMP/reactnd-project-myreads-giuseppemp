@@ -8,11 +8,12 @@ function Bookshelf(props) {
   const livrosDaEstante = [...livros]
     .filter(livro => livro.shelf === valor)
     .map(livro => {
-      const { title, authors, imageLinks, shelf } = livro;
+      const { title, authors, imageLinks, shelf, id } = livro;
       console.log(shelf, valor);
       return (
-        <li>
+        <li key={id}>
           <Book
+            codigoDoLivro={id}
             estantes={estantes}
             estante={shelf}
             titulo={title}
@@ -44,7 +45,7 @@ Bookshelf.propTypes = {
   // @param onChangeLivros, função que deve-se chamar quando modificar os livros.
   onChangeLivros: PropTypes.func.isRequired,
   // @param estantes, lista de estantes disponíveis passada para Changer.
-  estantes: PropTypes.array.isRequired
+  estantes: PropTypes.any.isRequired
 };
 
 Bookshelf.defaultProps = {

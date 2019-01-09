@@ -36,9 +36,9 @@ class BooksApp extends React.Component {
 
   render() {
     const Estantes = [...this.state.estantes].map(estante => {
-      console.log(estante[1]);
       return (
         <Bookshelf
+          key={estante[1]}
           onChangeLivros={this.onChangeLivros}
           nome={estante[0]}
           valor={estante[1]}

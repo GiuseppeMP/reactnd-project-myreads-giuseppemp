@@ -31,7 +31,7 @@ Book.propTypes = {
   // @param titulo utilizado abaixo da capa.
   titulo: PropTypes.string.isRequired,
   // @param autor, nome do autor utilizado abaixo do titulo.
-  autores: PropTypes.string.isRequired,
+  autores: PropTypes.array.isRequired,
   // url acessível da imagem usado como capa.
   capa: PropTypes.string.isRequired,
   // largura utilizada na imagem da capa.
@@ -43,7 +43,9 @@ Book.propTypes = {
   // @param onChangeLivros, função que deve-se chamar quando modificar os livros.
   onChangeLivros: PropTypes.func.isRequired,
   // @param estantes, lista de options a ser exibida como destino.
-  estantes: PropTypes.array.isRequired
+  estantes: PropTypes.any.isRequired,
+  // @param codigoDoLivro, é utilizado para realizar as chamadas para api.
+  codigoDoLivro: PropTypes.string.isRequired
 };
 
 Book.defaultProps = {
