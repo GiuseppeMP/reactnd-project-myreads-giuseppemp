@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Bookshelf from "Bookshelf";
+import Search from "Bookshelf/Book/Search";
 
 /** 
  This course is not designed to teach Test Driven Development. 
@@ -11,13 +11,7 @@ import Bookshelf from "Bookshelf";
 it("renders without crashing", () => {
   const div = document.createElement("div");
   ReactDOM.render(
-    <Bookshelf
-      valor="etc"
-      nome="etc"
-      livros={[]}
-      estantes={[]}
-      onChangeLivros={console.log}
-    />,
+    <Search livros={[]} estantes={[]} onChangeLivros={() => console.log("")} />,
     div
   );
 });

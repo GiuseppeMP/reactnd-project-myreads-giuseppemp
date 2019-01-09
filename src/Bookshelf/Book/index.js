@@ -8,7 +8,6 @@ import Changer from "./Changer";
  */
 function Book(props) {
   const { largura, altura, capa, titulo, autores } = props;
-  console.log(capa);
   return (
     <div className="book">
       <div className="book-top">
@@ -20,7 +19,7 @@ function Book(props) {
             backgroundImage: `url(${capa})`
           }}
         />
-        <Changer />
+        <Changer {...props} />
       </div>
       <div className="book-title">{titulo}</div>
       <div className="book-authors">{autores}</div>
@@ -42,7 +41,9 @@ Book.propTypes = {
   // estante pai, no caso é passado para o child o nome do <Bookshelf/> parent.
   estante: PropTypes.string.isRequired,
   // @param onChangeLivros, função que deve-se chamar quando modificar os livros.
-  onChangeLivros: PropTypes.func.isRequired
+  onChangeLivros: PropTypes.func.isRequired,
+  // @param estantes, lista de options a ser exibida como destino.
+  estantes: PropTypes.array.isRequired
 };
 
 Book.defaultProps = {

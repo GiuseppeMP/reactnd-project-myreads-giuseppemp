@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Bookshelf from "Bookshelf";
+import Book from "Bookshelf/Book";
+import Faker from "faker";
 
 /** 
  This course is not designed to teach Test Driven Development. 
@@ -11,12 +12,15 @@ import Bookshelf from "Bookshelf";
 it("renders without crashing", () => {
   const div = document.createElement("div");
   ReactDOM.render(
-    <Bookshelf
-      valor="etc"
+    <Book
       nome="etc"
+      capa={Faker.image.imageUrl()}
+      titulo="titulo"
+      autores="autores"
       livros={[]}
       estantes={[]}
-      onChangeLivros={console.log}
+      estante="none"
+      onChangeLivros={() => console.log("")}
     />,
     div
   );
