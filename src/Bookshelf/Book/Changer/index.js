@@ -8,13 +8,15 @@ import * as BooksAPI from "Bookshelf/Book/api";
  * desabilitada.
  */
 class Changer extends Component {
-  onChangeTrocarEstante = event => {
-    //BooksAPI.update(this.props.codigoDoLivro)
-    console.log("changed", event.target.value);
+  onChangeTrocarEstante = async event => {
+    const { codigoDoLivro } = this.props;
+    console.log("changed", event.target.value, codigoDoLivro);
+    await BooksAPI.update(codigoDoLivro, event.target.value);
+    this.props.onChangeLivros();
   };
 
   render = () => {
-    const { estantes, estante } = this.props;
+    const { estantes, estante, codigoDoLivro } = this.props;
     const opcoes = [...estantes].map(estanteLista => {
       let [valor, nome] = [estanteLista[1], estanteLista[0]];
       return (

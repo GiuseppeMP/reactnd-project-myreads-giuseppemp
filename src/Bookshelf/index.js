@@ -9,7 +9,7 @@ function Bookshelf(props) {
     .filter(livro => livro.shelf === valor)
     .map(livro => {
       const { title, authors, imageLinks, shelf, id } = livro;
-      console.log(shelf, valor);
+      console.log(shelf, valor, id);
       return (
         <li key={id}>
           <Book

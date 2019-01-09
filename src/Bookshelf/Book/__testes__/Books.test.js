@@ -13,10 +13,11 @@ it("renders without crashing", () => {
   const div = document.createElement("div");
   ReactDOM.render(
     <Book
+      codigoDoLivro="1"
       nome="etc"
       capa={Faker.image.imageUrl()}
       titulo="titulo"
-      autores="autores"
+      autores={["autor1", "autor2"]}
       livros={[]}
       estantes={[]}
       estante="none"
