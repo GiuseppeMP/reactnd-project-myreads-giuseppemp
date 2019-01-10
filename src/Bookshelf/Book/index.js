@@ -45,14 +45,22 @@ Book.propTypes = {
   // @param estantes, lista de options a ser exibida como destino.
   estantes: PropTypes.any.isRequired,
   // @param codigoDoLivro, é utilizado para realizar as chamadas para api.
-  codigoDoLivro: PropTypes.string.isRequired
+  codigoDoLivro: PropTypes.string.isRequired,
+  // @param vitrine, determina se o livro está sendo escolhido
+  vitrine: PropTypes.bool,
+  // @param carregando
+  carregando: PropTypes.func
 };
 
 Book.defaultProps = {
   // caso largura não seja informada, será utilizado ?128.
   largura: 128,
   // caso altura não seja informada, será utilizado ?188.
-  altura: 188
+  altura: 188,
+  // caso não seja informado vitrine recebe false.
+  vitrine: false,
+  // caso não seja informado, log.
+  carregando: () => console.warn("Controle loader não recebido")
 };
 
 export default Book;

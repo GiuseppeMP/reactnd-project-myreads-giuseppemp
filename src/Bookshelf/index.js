@@ -3,10 +3,18 @@ import PropTypes from "prop-types";
 import Book from "./Book";
 
 function Bookshelf(props) {
-  const { livros, valor, nome, onChangeLivros, estantes } = props;
+  const {
+    livros,
+    valor,
+    nome,
+    onChangeLivros,
+    estantes,
+    vitrine,
+    carregando
+  } = props;
 
   const livrosDaEstante = [...livros]
-    .filter(livro => livro.shelf === valor)
+    .filter(livro => livro.shelf === valor || vitrine)
     .map(livro => {
       const { title, authors, imageLinks, shelf, id } = livro;
       console.log(shelf, valor, id);
@@ -20,6 +28,8 @@ function Bookshelf(props) {
             onChangeLivros={onChangeLivros}
             autores={authors}
             capa={imageLinks.thumbnail}
+            vitrine={vitrine}
+            carregando={carregando}
           />
         </li>
       );
@@ -45,12 +55,20 @@ Bookshelf.propTypes = {
   // @param onChangeLivros, função que deve-se chamar quando modificar os livros.
   onChangeLivros: PropTypes.func.isRequired,
   // @param estantes, lista de estantes disponíveis passada para Changer.
-  estantes: PropTypes.any.isRequired
+  estantes: PropTypes.any.isRequired,
+  // @param vitrine, especifica se deve filtrar pelo parametro shelf.
+  vitrine: PropTypes.bool,
+  // @param carregando
+  carregando: PropTypes.func
 };
 
 Bookshelf.defaultProps = {
   // caso não possua nenhuma livro, iniciar vazia.
-  livros: []
+  livros: [],
+  // caso não seja informado vitrine recebe false.
+  vitrine: false,
+  // caso não seja informado, log.
+  carregando: () => console.warn("Controle loader não recebido")
 };
 
 export default Bookshelf;

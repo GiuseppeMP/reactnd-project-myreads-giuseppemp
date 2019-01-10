@@ -1,13 +1,15 @@
-import React from "react";
+import React, { Fragment } from "react";
 import * as BooksAPI from "Bookshelf/Book/api";
-//import "./App.css";
 import Bookshelf from "Bookshelf";
 import Search from "BookSearch";
+import { Route, Link } from "react-router-dom";
+import Spinner from "App/Spinner";
 
 class BooksApp extends React.Component {
   componentDidMount = () => {
+    this.carregando(true);
     BooksAPI.getAll().then(res => {
-      this.setState({ livros: res });
+      this.setState({ livros: res }, () => this.carregando(false));
     });
   };
 
@@ -25,12 +27,20 @@ class BooksApp extends React.Component {
       ["Read", "read"],
       ["None", "none"]
     ]),
-    livros: []
+    livros: [],
+    carregando: true
+  };
+
+  carregando = ligado => {
+    this.setState({
+      carregando: ligado
+    });
   };
 
   onChangeLivros = () => {
+    this.carregando(true);
     BooksAPI.getAll().then(res => {
-      this.setState({ livros: res });
+      this.setState({ livros: res, carregando: false });
     });
   };
 
@@ -44,30 +54,49 @@ class BooksApp extends React.Component {
           valor={estante[1]}
           livros={this.state.livros}
           estantes={this.state.estantes}
+          carregando={this.carregando}
         />
       );
     });
 
     return (
-      <div className="app">
-        {this.state.showSearchPage ? (
-          <Search />
-        ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>{Estantes}</div>
-            </div>
-            <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>
-                Add a book
-              </button>
-            </div>
+      <Fragment>
+        <Spinner ligado={this.state.carregando} />
+        <div className="app container ui">
+          <div class="column">
+            <Route
+              exact
+              path="/buscar"
+              render={() => (
+                <Search
+                  onChangeLivros={this.onChangeLivros}
+                  carregando={this.carregando}
+                />
+              )}
+            />
+
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <div className="list-books">
+                  <div className="list-books-title">
+                    <h1>My Reads</h1>
+                  </div>
+                  <div className="list-books-content">
+                    <div>{Estantes}</div>
+                  </div>
+                  <div className="open-search">
+                    <Link to="/buscar">
+                      <button title="Adicionar">Adicionar Livros</button>
+                    </Link>
+                  </div>
+                </div>
+              )}
+            />
           </div>
-        )}
-      </div>
+        </div>
+      </Fragment>
     );
   }
 }
