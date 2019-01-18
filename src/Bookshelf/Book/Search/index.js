@@ -118,7 +118,8 @@ class Search extends React.Component {
             nome={"resultados"}
             valor={"resultados"}
             vitrine={true}
-            livros={this.state.livrosBusca}
+            livros={this.props.livrosNaEstante}
+            livrosVitrine={this.state.livrosBusca}
             estantes={this.state.estantes}
             onChangeLivros={this.props.onChangeLivros}
           />
@@ -133,7 +134,14 @@ Search.propTypes = {
   // @param onChangeLivros, função que deve-se chamar quando modificar os livros.
   onChangeLivros: PropTypes.func.isRequired,
   // @param carregando
-  carregando: PropTypes.func
+  carregando: PropTypes.func,
+  // @param livrosNaEstante, contem os livros já presentes na estante.
+  livrosNaEstante: PropTypes.any
+};
+
+Search.defaultProps = {
+  // caso livros não sejam informados, será utilizado uma lista vazia.
+  livrosNaEstante: []
 };
 
 export default Search;

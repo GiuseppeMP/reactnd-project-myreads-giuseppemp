@@ -47,15 +47,17 @@ class BooksApp extends React.Component {
   render() {
     const Estantes = [...this.state.estantes].map(estante => {
       return (
-        <Bookshelf
-          key={estante[1]}
-          onChangeLivros={this.onChangeLivros}
-          nome={estante[0]}
-          valor={estante[1]}
-          livros={this.state.livros}
-          estantes={this.state.estantes}
-          carregando={this.carregando}
-        />
+        <div>
+          <Bookshelf
+            key={estante[1]}
+            onChangeLivros={this.onChangeLivros}
+            nome={estante[0]}
+            valor={estante[1]}
+            livros={this.state.livros}
+            estantes={this.state.estantes}
+            carregando={this.carregando}
+          />
+        </div>
       );
     });
 
@@ -69,6 +71,7 @@ class BooksApp extends React.Component {
               path="/search"
               render={() => (
                 <Search
+                  livrosNaEstante={this.state.livros}
                   onChangeLivros={this.onChangeLivros}
                   carregando={this.carregando}
                 />
