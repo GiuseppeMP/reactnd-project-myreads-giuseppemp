@@ -53,6 +53,7 @@ class BooksApp extends React.Component {
             onChangeLivros={this.onChangeLivros}
             nome={estante[0]}
             valor={estante[1]}
+            livrosNaEstante={this.state.livros}
             livros={this.state.livros}
             estantes={this.state.estantes}
             carregando={this.carregando}
@@ -65,7 +66,7 @@ class BooksApp extends React.Component {
       <Fragment>
         <Spinner ligado={this.state.carregando} />
         <div className="app container ui">
-          <div class="column">
+          <div className="column">
             <Route
               exact
               path="/search"

@@ -23,8 +23,8 @@ class Search extends React.Component {
       termo: event.target.value,
       digitando: false,
       digitandoTimeout: setTimeout(function() {
-        let livros = BooksAPI.search(_this.state.termo);
         _this.props.carregando(true);
+        let livros = BooksAPI.search(_this.state.termo);
         livros.then(res => {
           if (res.error) {
             _this.setState({ mensagem: res.error });
@@ -116,8 +116,8 @@ class Search extends React.Component {
             nome={"resultados"}
             valor={"resultados"}
             vitrine={true}
-            livros={this.props.livrosNaEstante}
-            livrosVitrine={this.state.livrosBusca}
+            livrosNaEstante={this.props.livrosNaEstante}
+            livros={this.state.livrosBusca}
             estantes={this.state.estantes}
             onChangeLivros={this.props.onChangeLivros}
           />

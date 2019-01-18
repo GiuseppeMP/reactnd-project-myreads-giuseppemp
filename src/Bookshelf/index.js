@@ -13,15 +13,22 @@ function Bookshelf(props) {
     estantes,
     vitrine,
     carregando,
-    livrosVitrine
+    livrosNaEstante
   } = props;
 
-  const livrosDaEstante = [...livros, ...livrosVitrine]
+  const livrosDaEstante = [...livros]
 
     .filter(livro => livro.shelf === valor || vitrine)
     .map(livro => {
-      const { title, authors, imageLinks, shelf, id } = livro;
-      console.log(shelf, valor, id);
+      const { title, authors, imageLinks, id } = livro;
+
+      let shelf = livro.shelf;
+
+      livrosNaEstante
+        .filter(livroNaEstante => livroNaEstante.id === id)
+        .forEach(livroNaEstante => {
+          shelf = livroNaEstante.shelf;
+        });
 
       let capa = null;
 
@@ -77,7 +84,7 @@ Bookshelf.propTypes = {
   // @param vitrine, especifica se deve filtrar pelo parametro shelf.
   vitrine: PropTypes.bool,
   // @param, array de books da vitrine que serão controlados pela estante.
-  livrosVitrine: PropTypes.array,
+  livrosNaEstante: PropTypes.array,
   // @param carregando
   carregando: PropTypes.func
 };
@@ -88,7 +95,7 @@ Bookshelf.defaultProps = {
   // caso não seja informado vitrine recebe false.
   vitrine: false,
   // caso não possua nenhuma livro, iniciar vazia.
-  livrosVitrine: [],
+  livrosNaEstante: [],
   // caso não seja informado, log.
   carregando: () => console.warn("Controle loader não recebido")
 };

@@ -23,7 +23,8 @@ class Changer extends Component {
       estantesChanger = new Map([
         ["Currently Reading", "currentlyReading"],
         ["Want to Read", "wantToRead"],
-        ["Read", "read"]
+        ["Read", "read"],
+        ["None", "none"]
       ]);
     }
     const opcoes = [...estantesChanger].map(estanteLista => {
