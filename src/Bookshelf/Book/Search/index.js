@@ -23,11 +23,9 @@ class Search extends React.Component {
       termo: event.target.value,
       digitando: false,
       digitandoTimeout: setTimeout(function() {
-        console.log(_this.state.termo);
         let livros = BooksAPI.search(_this.state.termo);
         _this.props.carregando(true);
         livros.then(res => {
-          console.log(res);
           if (res.error) {
             _this.setState({ mensagem: res.error });
           } else {
@@ -36,7 +34,7 @@ class Search extends React.Component {
           }
           _this.props.carregando(false);
         });
-      }, 1500)
+      }, 1000)
     });
   };
 
