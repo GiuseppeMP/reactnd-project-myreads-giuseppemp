@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Book from "./Book";
+import _ from "underscore";
+import Faker from "faker";
 
 function Bookshelf(props) {
   const {
@@ -20,6 +22,20 @@ function Bookshelf(props) {
     .map(livro => {
       const { title, authors, imageLinks, shelf, id } = livro;
       console.log(shelf, valor, id);
+
+      let capa = null;
+
+      if (_.isUndefined(imageLinks) || _.isUndefined(imageLinks.thumbnail)) {
+        capa = Faker.image.image;
+      } else {
+        capa = imageLinks.thumbnail;
+      }
+
+      let autores = authors;
+      if (_.isUndefined(authors) || _.isEmpty(authors)) {
+        autores = [..."Autor Desconhecido."];
+      }
+
       return (
         <li key={id}>
           <Book
@@ -28,8 +44,8 @@ function Bookshelf(props) {
             estante={shelf}
             titulo={title}
             onChangeLivros={onChangeLivros}
-            autores={authors}
-            capa={imageLinks.thumbnail}
+            autores={autores}
+            capa={capa}
             vitrine={vitrine}
             carregando={carregando}
           />
